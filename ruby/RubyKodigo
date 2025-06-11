@@ -1,0 +1,110 @@
+RUBY KODIGO
+
+# comments start with a hashtag
+
+# how to output to terminal
+puts <output>
+
+6.even? #=> true
+7.even? #=> false
+
+6.odd? #=> false
+7.odd? #=> true
+
+# To convert an integer to a float:
+13.to_f   #=> 13.0
+
+# To convert a float to an integer:
+13.0.to_i #=> 13
+13.9.to_i #=> 13
+
+# Accessing substrings
+"hello"[0]      #=> "h"
+"hello"[0..1]   #=> "he"
+"hello"[0, 4]   #=> "hell"
+"hello"[-1]     #=> "o"
+
+# Dynamic strings like in javascript
+puts "Hello, #{name}" #=> "Hello, Odin"
+
+# Converting objects to string is used with .to_s
+5.to_s        #=> "5"
+nil.to_s      #=> ""
+:symbol.to_s  #=> "symbol"
+
+#map, apply something to all elements
+[1, 2, 3, 4, 5].map { |i| i * 3 }
+
+# sample loop syntax
+def array_copy(source)
+  destination = []
+  # your code
+  for i in source
+    if i < 4
+      destination.push(i)
+    end
+  end
+  return destination
+end
+
+# for each loop
+def array_copy(source)
+  destination = []
+  # your code
+  source.each do |i|
+    if i < 4
+      destination.push(i)
+    end
+  end
+  return destination
+end
+
+
+# hash syntax
+# restaurant_menu = { "Ramen" => 3, "Dal Makhani" => 4, "Coffee" => 2 }
+restaurant_menu.each do | item, price |
+  puts "#{item}: $#{price}"
+end
+
+# class syntax
+# class Rectangle
+class Rectangle
+  def initialize(length, breadth)
+    @length = length
+    @breadth = breadth
+  end
+
+  def perimeter
+    2 * (@length + @breadth)
+  end
+
+  def area
+    @length * @breadth
+  end
+end
+
+# method syntax
+def add_two(a)
+  return a + 2
+end
+
+# method with options
+def add(a_number, another_number, options = {})
+  sum = a_number + another_number
+  sum = sum.abs if options[:absolute]
+  sum = sum.round(options[:precision]) if options[:round]
+  sum
+end
+
+puts add(1.0134, -5.568)
+puts add(1.0134, -5.568, absolute: true)
+puts add(1.0134, -5.568, absolute: true, round: true, precision: 2)
+
+# Gets is the standard input
+puts "Enter a value :"
+val = gets
+puts val
+
+# putc outputs one character at a time
+str = "Hello Ruby!"
+putc str
