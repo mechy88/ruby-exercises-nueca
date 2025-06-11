@@ -19,4 +19,3 @@ if is_palindrome(target)
 else
   puts "\"#{target}\" is NOT a Palindrome!"
 end
-# resources

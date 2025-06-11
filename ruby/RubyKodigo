@@ -66,6 +66,16 @@ restaurant_menu.each do | item, price |
   puts "#{item}: $#{price}"
 end
 
+# hash syntax
+restaurant_menu = {
+  "Ramen" => 3,
+    "Dal Makhani" => 4,
+  "Tea" => 2
+  }
+
+#fetch values from hash
+restaurant_menu["Ramen"]
+
 # class syntax
 # class Rectangle
 class Rectangle
@@ -108,3 +118,15 @@ puts val
 # putc outputs one character at a time
 str = "Hello Ruby!"
 putc str
+
+# using for loop with the range
+for a in 1..5 do
+    
+ puts i
+ 
+end
+
+# while loop syntax
+while conditional [do]
+ # code to be executed
+end
