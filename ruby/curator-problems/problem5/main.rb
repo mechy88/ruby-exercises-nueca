@@ -12,7 +12,7 @@ def is_palindrome string
 end
 
 def remove_special_characters_regex(str)
-    str.gsub(/[^\w\s]/, '')
+    str.gsub(/[^\w\s]/, '').gsub(/\s+/, "")
 end
 
 
