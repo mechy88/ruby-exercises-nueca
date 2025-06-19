@@ -10,5 +10,5 @@
 #     end
 # end
 
-input = gets
-print input
+input = ARGV.join " "
+puts input
