@@ -127,6 +127,213 @@ for a in 1..5 do
 end
 
 # while loop syntax
-while conditional [do]
+while conditional do
  # code to be executed
 end
+
+# block syntax
+addition = lambda {|a, b| return a + b }
+puts addition.call(5, 6)
+
+def calculation(a, b, &block) # &block is an explicit (named) parameter
+ block.call(a, b)
+end
+
+puts calculation(5, 5) { |a, b| a + b } # this is an implicit block
+                                        # -- it is nameless and is not 
+                                        # passed as an explicit parameter.
+
+
+                                        
+
+def calculation(a, b)
+  yield(a, b) # yield calls an implicit (unnamed) block 
+end
+
+addition = lambda {|x, y| x + y}
+puts calculation(5, 5, &addition) # like our last example, &addition is 
+                                  # an explicit (named) block 
+                                  # -- but `yield` can still call it!
+
+# Shotened notation for lambda
+short = ->(a, b) { a + b }
+puts short.call(2, 3)
+
+long = lambda { |a, b| a + b }
+puts long.call(2, 3)
+
+puts "A String".is_a?(String) # true
+puts 1.is_a?(String)          # false
+
+
+# returns the object's class
+object.class
+
+def know_it_all(object)
+  object.class
+end
+
+Float.ancestors # gets all ancestors / parents of float
+
+# simple getter method syntax
+class Item
+  attr_reader :item_name  
+
+  def initialize(item_name)
+    @item_name = item_name
+  end  
+end
+
+item = Item.new("agragarok")
+p item.item_name
+
+
+# simple setter method syntax
+class Item
+  attr_writer :description
+  attr_writer :color
+  
+  def initialize(description, color)
+    @description = description
+    @color = color
+  end
+end
+
+# attr_accessor for both getting and setting
+
+
+
+# similar to static methods in java, these are class methods
+class Item
+  def self.show
+    puts "Class method show invoked"
+  end  
+end
+
+Item.show
+
+# object equality
+class Item
+  attr_reader :item_name, :quantity, :supplier_name, :price
+  def initialize(item_name, quantity, supplier_name, price)
+    @item_name = item_name
+    @quantity = quantity
+    @supplier_name = supplier_name
+    @price = price
+  end
+  
+  # implement ==, eql? and hash
+  def ==(other_object)
+    return (
+      @item_name == other_object.item_name && 
+      @quantity == other_object.quantity &&
+      @supplier_name == other_object.supplier_name &&
+      @price == other_object.price
+      )
+  end
+  
+  def eql?(other_object)
+    return (self == other_object) 
+  end
+  
+  def hash
+    return self.item_name.hash ^ self.quantity.hash ^ self.supplier_name.hash ^ self.price.hash
+  end
+end
+
+# printing
+class Item
+  def inspect
+    "Result of inspect"
+  end
+end
+
+puts Item.new
+puts Item.new.to_s
+p Item.new
+
+def occurrences(str)
+  # scans the string for words, breaks them apart to an array enumerable
+	str.scan(/\w+/).inject(Hash.new(0)) do |build, word| 
+      # converts the current word in lowercase, and adds to the map, increments that element's value
+  	build[word.downcase] +=1
+      # returns build? AHH it's mapping
+      build # since this is the last value, it returns this if this is the last iteration
+	end
+end
+
+
+#  Each with index
+top_10 = ["Walmart", "Exxon Mobil", "Apple", "Berkshire Hathaway", "Amazon.com", "UnitedHealth Group", "McKesson", "CVS Health", "AT&T", "AmerisourceBergen"]
+  top_10.each_with_index do | company, index |
+    puts "#{index}. #{company}"
+  end
+
+# how to define a singleton method / function. Only the metaclass of instance Foo in foo will contain the shout method
+class Foo
+end
+
+foo=Foo.new
+def foo.shout
+  puts "Foo Foo Foo!"
+end
+foo.shout
+  
+p Foo.new.respond_to?(:shout)
+
+# use the .clone to copy an object
+object.clone
+
+#use the .freeze method to avoid any changes to the object
+obect.freeze
+
+# checks wheather a block is passed to the method
+block_given?
+
+# benchmarking code on ruby
+begin_time = Time.now
+sleep 0.3
+end_time = Time.now
+puts "Time taken is #{end_time - begin_time}."
+
+# benchmarking using the benchmarking library
+require 'benchmark'
+
+puts Benchmark.measure { 602214.times { 3.14159 * 6.626068 } }
+
+
+# benchmarking multiple blocks against each other, summarizes a report
+require 'benchmark'
+
+n=4000
+Benchmark.bm do |benchmark|
+  benchmark.report do
+    a=[]; n.times { a = a + [n] }
+  end
+  benchmark.report do
+    a=[]; n.times { a << n }
+  end
+  benchmark.report do
+    a=[1..n].map {|number| number}
+  end
+end
+
+# SAMPLE REPORT
+  #      user     system      total        real
+  #  0.008781   0.013060   0.021841 (  0.022032)
+  #  0.000182   0.000053   0.000235 (  0.000235)
+  #  0.000004   0.000001   0.000005 (  0.000005)
+
+  # programatically define function
+  class Doctor
+  ["rhinoplasty", "checkup", "interpretive_dance"].each do |action|
+	  define_method("perform_#{action}") do |argument|
+			"performing #{action.gsub('_', ' ')} on #{argument}"
+  	end
+  end
+end
+
+doctor = Doctor.new
+puts doctor.perform_rhinoplasty("nose")
+puts doctor.perform_checkup("throat")
+puts doctor.perform_interpretive_dance("in da club")
