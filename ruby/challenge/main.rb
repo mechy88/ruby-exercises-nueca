@@ -150,8 +150,8 @@ end
 
 # Get the average time it takes for senario A 
 average_a = Senario_A.inject{ |sum, el| sum + el }.to_f / Senario_A.size
-puts "Senario 1 took an average of " + average_a.to_s + " minutes to finish over 500 simulations"
+puts "Senario A took an average of " + average_a.to_s + " minutes to finish over 500 simulations"
 
 # Get the average time it takes for senario B
 average_b = Senario_B.inject{ |sum, el| sum + el }.to_f / Senario_B.size
-puts "Senario 1 took an average of " + average_b.to_s + " minutes to finish over 500 simulations"
+puts "Senario B took an average of " + average_b.to_s + " minutes to finish over 500 simulations"
