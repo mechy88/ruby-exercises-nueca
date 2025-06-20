@@ -14,3 +14,5 @@ for i in 1..input do
     print " "
   end
 end
+
+puts
