@@ -61,4 +61,6 @@ if input[0] && input[1]
         print array.fetch((i.to_i - 1), "?")
     end
   end
+
+  puts
 end
