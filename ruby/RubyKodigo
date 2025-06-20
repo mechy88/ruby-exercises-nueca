@@ -333,7 +333,20 @@ end
   end
 end
 
+# how to use some lifecycle events/calls. These fire whenever different kinds of methods are created
 doctor = Doctor.new
 puts doctor.perform_rhinoplasty("nose")
 puts doctor.perform_checkup("throat")
 puts doctor.perform_interpretive_dance("in da club")
+
+def AN_OBJECT.methods_added
+  unless AN_OBJECT.is_a?(Class)
+    @@methods_added ||= []
+  end
+end
+
+def AN_OBJECT.singleton_methods_added
+  if AN_OBJECT.instance_of?(Object)
+    @@singleton_methods_added ||= []
+  end
+end

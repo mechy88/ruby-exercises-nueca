@@ -1,4 +1,4 @@
-input = gets.to_i
+input = ARGV[0].to_i
 
 for i in 1..input do
   if ((i % 3 == 0) && (i % 5 == 0))

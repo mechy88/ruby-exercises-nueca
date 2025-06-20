@@ -1,4 +1,4 @@
-input = gets.split
+input = ARGV
 target = "Nemo"
 if !(input.include?(target))
   puts "Nemo is missing."

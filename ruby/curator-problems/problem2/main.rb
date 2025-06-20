@@ -15,8 +15,11 @@ def element(n)
 end
 
 
-line = gets
-line = line.split
+# line = gets
+# line = line.split
+
+line = ARGV
+
 arr = []
 
 for a in 1..line[0].to_i do
@@ -33,4 +36,3 @@ line.each do |i|
     first = false
     print arr.fetch((i.to_i - 1), "?")
 end
-# print "\n"
