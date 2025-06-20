@@ -41,19 +41,24 @@
 input = ARGV
 array = []
 
-# get the first element
-array[0] = "a"
-(input.shift().to_i - 1).times do |i|
-  array.push(array[i].next)
-end
+if input[0] && input[1]
+  # get the first element
+  if input[0].to_i != 0
+    array[0] = "a"
+  end
+  (input.shift().to_i - 1).times do |i|
+    array.push(array[i].next)
+  end
 
-first = true
-input.each do |i|
-    if !first
-      print " "
+  first = true
+
+  if input[0]
+    input.each do |i|
+        if !first
+          print " "
+        end
+        first = false
+        print array.fetch((i.to_i - 1), "?")
     end
-    first = false
-    print array.fetch((i.to_i - 1), "?")
+  end
 end
-
-puts
