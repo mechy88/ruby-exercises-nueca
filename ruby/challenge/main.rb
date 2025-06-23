@@ -65,6 +65,11 @@ class Dispatcher
 
     dispatched
   end
+
+  # The new basis on senario 2 to optimize queues
+  def queue_compute(queue)
+    queue.inject { |sum, el| sum + el }.to_f
+  end
 end
 
 # Returns the average time senario A takes over
@@ -107,9 +112,9 @@ def run_simulation_b(customers)
     serving = dispatcher.dispatch
 
     serving.each do |customer|
-      a = tellers.tell_a.length
-      b = tellers.tell_b.length
-      c = tellers.tell_c.length
+      a = dispatcher.queue_compute(tellers.tell_a)
+      b = dispatcher.queue_compute(tellers.tell_b)
+      c = dispatcher.queue_compute(tellers.tell_c)
 
       if c < b && c < a
         tellers.push_c(customer * tellers.c)
