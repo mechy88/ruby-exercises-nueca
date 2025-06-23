@@ -28,7 +28,7 @@ def run_simulation_b(customers)
     minutes += 1
     serving = dispatcher.dispatch
 
-    queue_b(serving, tellers, dispatcher)
+    queue_b(serving, tellers)
 
     tellers.process
   end
@@ -41,31 +41,31 @@ def queue_a(serving, tellers)
   end
 end
 
-def queue_b(serving, tellers, dispatcher)
+def queue_b(serving, tellers)
   serving.each do |customer|
-    a = dispatcher.queue_compute(tellers.tell_a)
-    b = dispatcher.queue_compute(tellers.tell_b)
-    c = dispatcher.queue_compute(tellers.tell_c)
+    finish_time_a = Dispatcher.queue_compute(tellers.tell_a)
+    finish_time_b = Dispatcher.queue_compute(tellers.tell_b)
+    finish_time_c = Dispatcher.queue_compute(tellers.tell_c)
 
-    fall_in_line_efficient(customer, tellers, a, b, c)
+    fall_in_line_efficient(customer, tellers, finish_time_a, finish_time_b, finish_time_c)
   end
 end
 
 def fall_in_line_efficient(customer, tellers, a_queue, b_queue, c_queue)
   if c_queue < b_queue && c_queue < a_queue
-    tellers.push_c(customer * tellers.c)
+    tellers.push_c(customer * tellers.multiplier_c)
   elsif b_queue < a_queue
-    tellers.push_b(customer * tellers.b)
+    tellers.push_b(customer * tellers.multiplier_b)
   else
-    tellers.push_a(customer * tellers.a)
+    tellers.push_a(customer * tellers.multiplier_a)
   end
 end
 
 def fall_in_line_random(customer, tellers)
   lines = [
-    { line: tellers.tell_a, multiplier: tellers.a },
-    { line: tellers.tell_b, multiplier: tellers.b },
-    { line: tellers.tell_c, multiplier: tellers.c }
+    { line: tellers.tell_a, multiplier: tellers.multiplier_a },
+    { line: tellers.tell_b, multiplier: tellers.multiplier_b },
+    { line: tellers.tell_c, multiplier: tellers.multiplier_c }
   ]
   min = lines.min_by { |line| line[:line].length }
   min = min[:line].length

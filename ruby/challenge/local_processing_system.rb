@@ -2,15 +2,15 @@
 
 # This class contains all the Teller's queues
 class LocalProcessingSystem
-  attr_accessor :tell_a, :tell_b, :tell_c, :a, :b, :c
+  attr_reader :tell_a, :tell_b, :tell_c, :multiplier_a, :multiplier_b, :multiplier_c
 
   def initialize
     @tell_a = []
     @tell_b = []
     @tell_c = []
-    @a = 1
-    @b = 2
-    @c = 3
+    @multiplier_a = 1
+    @multiplier_b = 2
+    @multiplier_c = 3
   end
 
   # Returns true when the queue is finished i.e. no more customers in the queues
@@ -19,19 +19,19 @@ class LocalProcessingSystem
   end
 
   # elapse 1 minute for a queue
-  def process_queue(queue)
+  def self.process_queue(queue)
     return if queue.empty?
 
-    queue[0] = queue[0] - 1
-    queue.shift if queue[0].zero?
+    front = queue[0] -= 1
+    queue.shift if front.zero?
   end
 
   # process the queues as for 1 elapsed minute
   def process
     # elapse 1 minute for teller a, b, c
-    process_queue @tell_a
-    process_queue @tell_b
-    process_queue @tell_c
+    LocalProcessingSystem.process_queue @tell_a
+    LocalProcessingSystem.process_queue @tell_b
+    LocalProcessingSystem.process_queue @tell_c
   end
 
   def push_a(customer)

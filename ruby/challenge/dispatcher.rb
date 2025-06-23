@@ -20,7 +20,7 @@ class Dispatcher
   end
 
   # The new basis on senario 2 to optimize queues
-  def queue_compute(queue)
+  def self.queue_compute(queue)
     queue.inject { |sum, el| sum + el }.to_f
   end
 end
