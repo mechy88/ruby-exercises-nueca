@@ -2,7 +2,7 @@
 
 ## Problem
 
-There is a local processing system in your nearby area that has 3 tellers, and everyone falls in line for each teller. Curious, you thought. You briefly asked the manager if each teller performs the same tasks as the other. They responded with a Yes. So, you thought their system can be further optimized, but you need proof of concept.
+There is a local processing system in your nearby area that has 3 tellers, and everyone falls in line for each teller. Curious, you thought. You briefly asked the manager if each teller performs the same tasks as the other. They responded with a Yes. So, you thought their system can be further optifomized, but you need proof of concept.
 
 ## Task
 
